@@ -14,6 +14,15 @@
 
 // Options : **Attack** : if attack >= 0.7(Hit and subtract 
 
+// let captains = ['Warf', 'Xorn', 'Orion', 'Gargamell', 'Phobos', 'Dylon']
+// let capName = () => {
+//     let i = Math.floor(Math.random()*captains,length)
+//     return i; }
+
+
+
+
+// The players character and ship stats
 const PC = {
     name: '',
     ship: 'The Uss Schwarzenegger',
@@ -21,12 +30,7 @@ const PC = {
     firepower: 5,
     acc: 0.7
 }
-
-// let captains = ['Warf', 'Xorn', 'Orion', 'Gargamell', 'Phobos', 'Dylon']
-// let capName = () => {
-//     let i = Math.floor(Math.random()*captains,length)
-//     return i; }
-
+// Enemy constructor 
 class Enemy {
     constructor(captain, hull, firepower,acc){
         this.captain = captain
@@ -36,7 +40,7 @@ class Enemy {
 
     }
 }
-
+// Random attack roll
 let rollAttack = () => {
     var min = 0.1,
         max = 1.0,
@@ -44,8 +48,7 @@ let rollAttack = () => {
         att = highlightedNumber.toFixed(1)
     console.log(att);
 };
-
-
+// Randomized enemy healht
 let enemyHull = () => {
     var min = 3,
         max = 7,
@@ -53,7 +56,7 @@ let enemyHull = () => {
         return health;
     // console.log(score);
 };
-
+// Randomized enemy firepower
 let enemyPower = () => {
     var min = 2,
         max = 5,
@@ -61,7 +64,7 @@ let enemyPower = () => {
         return power
     // console.log(score);
 };
-
+// Randomized enemy accuaracy
 let enemyAcc = () => {
     var min = 0.6,
         max = 0.8,
@@ -71,6 +74,7 @@ let enemyAcc = () => {
     console.log(acc);
 };
 
+// Enemies
 let enemy1 = new Enemy("Xorn", enemyHull(), enemyPower(), enemyAcc())
 
 let enemy2 = new Enemy("Warf", enemyHull(), enemyPower(), enemyAcc())
@@ -85,9 +89,3 @@ let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
 
 // rollAttack();
 
-console.log(enemy1)
-console.log(enemy2)
-console.log(enemy3)
-console.log(enemy4)
-console.log(enemy5)
-console.log(enemy6)

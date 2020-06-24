@@ -1,4 +1,4 @@
-// REMEMBER COMMENTS!!!!!!
+// REMEMBER COMMENTS!!!!!! ALERT BASED CHROME GaME
 
 // Math.floors —  round roll to the first decimal point ex : 0.5, 0.7, 0.8.  Use your die roller to make enemy stats, use a class to generate and save?  
 
@@ -23,11 +23,19 @@ const PC {
 }
 
 class Enemy {
-    constructor(){
-        this.captain = ,
+    constructor(captain, hull, firepower,acc){
+        this.captain = captain
+        this.hull = hull //btween 3 and 6
+        this.firepower = firepower  //between 2 and 4
+        this.acc = acc  //between 0.6 and 0.8
 
     }
 }
+
+let Firstship = new Enemy("Xorn", )
+
+
+
 
 class Bookmark {
     constructor(title, author) {

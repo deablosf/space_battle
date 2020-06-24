@@ -14,7 +14,7 @@
 
 // Options : **Attack** : if attack >= 0.7(Hit and subtract 
 
-const PC {
+const PC = {
     name: '',
     ship: 'The Uss Schwarzenegger',
     hull: 20,
@@ -57,5 +57,25 @@ const H = new Bookmark ("Hamlet", "William Shakespeare")
 const WP = new Bookmark ("War and Peace", "Leo Tolstoy")
 
 // console.log(PP)
-console.log(H.title)
-console.log(WP.title)
+// console.log(H.title)
+// console.log(WP.title)
+
+let rollAttack = () => {
+    var min = 0.1,
+        max = 1.0,
+        highlightedNumber = Math.random() * (max - min) + min;
+        acc = highlightedNumber.toFixed(1)
+    console.log(acc);
+};
+
+
+let enemyHull = () => {
+    var min = 3,
+        max = 7,
+        score = Math.floor(Math.random() * (max - min) + min);
+    console.log(score);
+};
+
+enemyHull();
+
+rollAttack();

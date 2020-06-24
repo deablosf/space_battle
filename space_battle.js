@@ -22,6 +22,11 @@ const PC = {
     acc: 0.7
 }
 
+// let captains = ['Warf', 'Xorn', 'Orion', 'Gargamell', 'Phobos', 'Dylon']
+// let capName = () => {
+//     let i = Math.floor(Math.random()*captains,length)
+//     return i; }
+
 class Enemy {
     constructor(captain, hull, firepower,acc){
         this.captain = captain
@@ -66,8 +71,23 @@ let enemyAcc = () => {
     console.log(acc);
 };
 
-let enemyOne = new Enemy("Xorn", enemyHull(), enemyPower(), enemyAcc())
+let enemy1 = new Enemy("Xorn", enemyHull(), enemyPower(), enemyAcc())
 
-rollAttack();
+let enemy2 = new Enemy("Warf", enemyHull(), enemyPower(), enemyAcc())
 
-console.log(enemyOne)
+let enemy3 = new Enemy("Orion", enemyHull(), enemyPower(), enemyAcc())
+
+let enemy4 = new Enemy("Gargamell", enemyHull(), enemyPower(), enemyAcc())
+
+let enemy5 = new Enemy("Dylon", enemyHull(), enemyPower(), enemyAcc())
+
+let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
+
+// rollAttack();
+
+console.log(enemy1)
+console.log(enemy2)
+console.log(enemy3)
+console.log(enemy4)
+console.log(enemy5)
+console.log(enemy6)

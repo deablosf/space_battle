@@ -14,3 +14,40 @@
 
 // Options : **Attack** : if attack >= 0.7(Hit and subtract 
 
+const PC {
+    name: '',
+    ship: 'The Uss Schwarzenegger',
+    hull: 20,
+    firepower: 5,
+    acc: 0.7
+}
+
+class Enemy {
+    constructor(){
+        this.captain = ,
+
+    }
+}
+
+class Bookmark {
+    constructor(title, author) {
+        this.title = title
+        this.author = author
+    }
+    getTitle () {
+        console.log(`Title: ${this.title}`)
+    }
+    getAuthor () {
+        console.log(`Author: ${this.author}`)
+    }
+}
+
+const PP = new Bookmark ("Pride and Prejudice", "Jane Austin")
+
+const H = new Bookmark ("Hamlet", "William Shakespeare")
+
+const WP = new Bookmark ("War and Peace", "Leo Tolstoy")
+
+// console.log(PP)
+console.log(H.title)
+console.log(WP.title)

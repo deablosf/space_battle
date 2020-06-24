@@ -32,50 +32,42 @@ class Enemy {
     }
 }
 
-let Firstship = new Enemy("Xorn", )
-
-
-
-
-class Bookmark {
-    constructor(title, author) {
-        this.title = title
-        this.author = author
-    }
-    getTitle () {
-        console.log(`Title: ${this.title}`)
-    }
-    getAuthor () {
-        console.log(`Author: ${this.author}`)
-    }
-}
-
-const PP = new Bookmark ("Pride and Prejudice", "Jane Austin")
-
-const H = new Bookmark ("Hamlet", "William Shakespeare")
-
-const WP = new Bookmark ("War and Peace", "Leo Tolstoy")
-
-// console.log(PP)
-// console.log(H.title)
-// console.log(WP.title)
-
 let rollAttack = () => {
     var min = 0.1,
         max = 1.0,
         highlightedNumber = Math.random() * (max - min) + min;
-        acc = highlightedNumber.toFixed(1)
-    console.log(acc);
+        att = highlightedNumber.toFixed(1)
+    console.log(att);
 };
 
 
 let enemyHull = () => {
     var min = 3,
         max = 7,
-        score = Math.floor(Math.random() * (max - min) + min);
-    console.log(score);
+        health = Math.floor(Math.random() * (max - min) + min);
+        return health;
+    // console.log(score);
 };
 
-enemyHull();
+let enemyPower = () => {
+    var min = 2,
+        max = 5,
+        power = Math.floor(Math.random() * (max - min) + min);
+        return power
+    // console.log(score);
+};
+
+let enemyAcc = () => {
+    var min = 0.6,
+        max = 0.8,
+        highlightedNumber = Math.random() * (max - min) + min;
+        acc = highlightedNumber.toFixed(1);
+        return acc
+    console.log(acc);
+};
+
+let enemyOne = new Enemy("Xorn", enemyHull(), enemyPower(), enemyAcc())
 
 rollAttack();
+
+console.log(enemyOne)

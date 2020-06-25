@@ -23,6 +23,8 @@
 
 
 // The players character and ship stats
+
+
 const PC = {
     name: '',
     ship: 'The Uss Schwarzenegger',
@@ -30,6 +32,8 @@ const PC = {
     firepower: 5,
     acc: 0.7
 }
+
+let action = "none";
 // Enemy constructor 
 class Enemy {
     constructor(captain, hull, firepower,acc){
@@ -87,13 +91,22 @@ let enemy5 = new Enemy("Dylon", enemyHull(), enemyPower(), enemyAcc())
 
 let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
 
+
 // rollAttack();
 
-window.alert("Welcome to space battle, lets see if we can get another box to pop up after this");
+window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You a fresh leutenant have been stationed on the USS Schwarzenegger. It's been a quiet patro-");
 
-let person = prompt("What's your name maggot", "Maggot?!")
+window.alert("BOOOOOOOOOOOOOOOOOOOOOOooooOOOOOoooOOOOOOOOM!")
+
+window.alert("When you come to an older woman is looking at you disapointed" )
+
+let person = prompt("What's your name Lt", "Bobby?")
 if (person == null || person == "") {
-  txt = "User cancelled the prompt.";
-} else {
-  window.alert("Hello " + person + "! How are you today?");
+    window.close();
+    window.alert("You cerum to your wounds and die ... end.");
+    } else {
+     window.alert("Congrates Captian " + person + "! Thanks to the last hull breach you've just been promoted.");
 };
+
+alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
+

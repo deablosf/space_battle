@@ -26,7 +26,7 @@
 
 
 const PC = {
-    name: '',
+    name: 'person',
     ship: 'The Uss Schwarzenegger',
     hull: 20,
     firepower: 5,
@@ -38,7 +38,7 @@ let action = "none";
 class Enemy {
     constructor(captain, hull, firepower,acc){
         this.captain = captain
-        this.hull = hull //btween 3 and 6
+        this.hull = hull //between 3 and 6
         this.firepower = firepower  //between 2 and 4
         this.acc = acc  //between 0.6 and 0.8
 
@@ -91,7 +91,8 @@ let enemy5 = new Enemy("Dylon", enemyHull(), enemyPower(), enemyAcc())
 
 let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
 
-
+let currentE = enemy1
+let turn = 1;
 // rollAttack();
 
 window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You a fresh leutenant have been stationed on the USS Schwarzenegger. It's been a quiet patro-");
@@ -108,5 +109,8 @@ if (person == null || person == "") {
      window.alert("Congrates Captian " + person + "! Thanks to the last hull breach you've just been promoted.");
 };
 
-alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
+window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
+
+
+action = prompt("Captain " + currentE.captain + ": 'Your lifeless husks will litter the void!' \nEnemy Ship: [Hull:" + currentE.hull + "] [Firepower: " + currentE.firepower + "] [Accuracy: " + currentE.acc + "]\nUSS Terminator: [Hull: " + PC.hull + "] [Firepower: " + PC.firepower + "] [Accuracy: " + PC.acc + "]\nYour new first Officer looks at you.", "fight or flee?")
 

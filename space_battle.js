@@ -89,3 +89,11 @@ let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
 
 // rollAttack();
 
+window.alert("Welcome to space battle, lets see if we can get another box to pop up after this");
+
+let person = prompt("What's your name maggot", "Maggot?!")
+if (person == null || person == "") {
+  txt = "User cancelled the prompt.";
+} else {
+  window.alert("Hello " + person + "! How are you today?");
+};

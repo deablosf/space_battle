@@ -92,13 +92,24 @@ let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
 
 let currentE = enemy1
 let turn = 1;
-// rollAttack();
 
-window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You a fresh leutenant have been stationed on the USS Schwarzenegger. It's been a quiet patro-");
+let pcStats = () => {
+    now = PC.ship + " -- Hull:[" + PC.hull + "] Firepower:[" + PC.firepower + "] Accuracy:[" + PC.acc + "]";
+    return now
+}
+
+let enemyStats = () => {
+    now = "Enemy Ship -- Hull:[" + currentE.hull + "] Firepower:[" + currentE.firepower + "] Accuracy:[" + currentE.acc + "]";
+    return now
+}
+
+// - - - - - - - - - - - - - - - -  BEGINNING OF GAME - - - - - - - - - - - - - - - -
+
+window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You a fresh lieutenant have been stationed on the USS Schwarzenegger. It's been a quiet patro-");
 
 window.alert("BOOOOOOOoooooooOOOOOOOOooooOOOOOoooOOOOOOOOM!")
 
-window.alert("When you come to an older woman is looking at you disapointed" )
+window.alert("When you come to an older woman is looking at you disappointed" )
 
 PC.name = prompt("What's your name Lt", "Bobby?")
 if (PC.name == null || PC.name == "") {
@@ -109,8 +120,7 @@ if (PC.name == null || PC.name == "") {
 
 window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
 
-
-action = prompt("Captain " + currentE.captain + ": 'Your lifeless husks will litter the void!' \nEnemy Ship: [Hull:" + currentE.hull + "] [Firepower: " + currentE.firepower + "] [Accuracy: " + currentE.acc + "]\nUSS Terminator: [Hull: " + PC.hull + "] [Firepower: " + PC.firepower + "] [Accuracy: " + PC.acc + "]\nYour new first Officer looks at you.", "fight or flee?")
+action = prompt("Captain " + currentE.captain + ": 'Your lifeless husks will litter the void!' \n\n" + enemyStats() + "]\n\n" + pcStats() + "\nYour new first Officer looks at you.", "fight or flee?")
 let fight = () => {
 if (action == null || action == "" || action == "flee") {
     window.alert("The USS Schwarzenegger scram throster come online and the warship B lines it back to earth!")
@@ -119,7 +129,7 @@ if (action == null || action == "" || action == "flee") {
             if (turn <= 1){
                 if (rollAttack() >= PC.acc) {
                     currentE.hull -= PC.firepower;
-                    window.alert("Direct Hit!");
+                    window.alert("Direct Hit!\n" + enemyStats());
                     turn +=1;
                     } else {
                         window.alert("Missed! Enemy ship is charging weapons!");
@@ -129,7 +139,7 @@ if (action == null || action == "" || action == "flee") {
                 } else if (turn >= 2) {
                     if (rollAttack() >= currentE.acc){
                         PC.hull -= currentE.firepower
-                        window.alert("We're Hit!");
+                        window.alert("We're Hit!\n" + pcStats());
                         turn -=1;
                     } else {
                         window.alert("We Narrowly avoided that one!");
@@ -141,4 +151,30 @@ if (action == null || action == "" || action == "flee") {
         }
     }
 }
+fight()
+
+if (PC.hull <= 0) {
+    window.alert("GAME OVER");
+} else if (currentE.hull <= 0) {
+    window.alert("'Sweet Christmas, WE WON!' The crew cheer, hug and thank their stars that Captain " + PC.name + " didn't get them killed")
+        currentE = enemy2
+        window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
+        window.alert("Helmsman: 'Oh Fu-' ")
+}
+
+action = prompt("Captain " + currentE.captain + ": 'My Brood will find your carcasses pleasing.' \n\n" + enemyStats() + "\n\n" + pcStats() + "\nYour crew look to you.", "fight or flee?")
+
+fight()
+
+if (PC.hull <= 0) {
+    window.alert("GAME OVER");
+} else if (currentE.hull <= 0) {
+    window.alert("'That's How We Do, THAT'S HOW WE DO!'\nCaptain " + PC.name + " Captain " + PC.name + " Captai- ")
+        currentE = enemy3
+        window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
+        window.alert("Helmsman: 'REALLY?!?' ")
+}
+
+action = prompt("Captain " + currentE.captain + ": 'You have proven yourself to be ... difficult. I will produce the solution to the problem that is your existance.' \n\n" + enemyStats() + "\n\n" + pcStats() + "\nYour crew looks confident that you will choose correctly", "fight or flee?")
+
 fight()

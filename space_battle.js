@@ -26,14 +26,13 @@
 
 
 const PC = {
-    name: 'person',
+    name: '',
     ship: 'The Uss Schwarzenegger',
     hull: 20,
     firepower: 5,
     acc: 0.7
 }
 
-let action = "none";
 // Enemy constructor 
 class Enemy {
     constructor(captain, hull, firepower,acc){
@@ -46,11 +45,11 @@ class Enemy {
 }
 // Random attack roll
 let rollAttack = () => {
-    var min = 0.1,
+    var min = 0.5,
         max = 1.0,
         highlightedNumber = Math.random() * (max - min) + min;
         att = highlightedNumber.toFixed(1)
-    console.log(att);
+    return att;
 };
 // Randomized enemy healht
 let enemyHull = () => {
@@ -97,20 +96,49 @@ let turn = 1;
 
 window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You a fresh leutenant have been stationed on the USS Schwarzenegger. It's been a quiet patro-");
 
-window.alert("BOOOOOOOOOOOOOOOOOOOOOOooooOOOOOoooOOOOOOOOM!")
+window.alert("BOOOOOOOoooooooOOOOOOOOooooOOOOOoooOOOOOOOOM!")
 
 window.alert("When you come to an older woman is looking at you disapointed" )
 
-let person = prompt("What's your name Lt", "Bobby?")
-if (person == null || person == "") {
-    window.close();
+PC.name = prompt("What's your name Lt", "Bobby?")
+if (PC.name == null || PC.name == "") {
     window.alert("You cerum to your wounds and die ... end.");
     } else {
-     window.alert("Congrates Captian " + person + "! Thanks to the last hull breach you've just been promoted.");
+     window.alert("Congrates Captian " + PC.name + "! Thanks to the last hull breach you've just been promoted.");
 };
 
 window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
 
 
 action = prompt("Captain " + currentE.captain + ": 'Your lifeless husks will litter the void!' \nEnemy Ship: [Hull:" + currentE.hull + "] [Firepower: " + currentE.firepower + "] [Accuracy: " + currentE.acc + "]\nUSS Terminator: [Hull: " + PC.hull + "] [Firepower: " + PC.firepower + "] [Accuracy: " + PC.acc + "]\nYour new first Officer looks at you.", "fight or flee?")
-
+let fight = () => {
+if (action == null || action == "" || action == "flee") {
+    window.alert("The USS Schwarzenegger scram throster come online and the warship B lines it back to earth!")
+    } else {
+        while (PC.hull > 0 && currentE.hull > 0) {
+            if (turn <= 1){
+                if (rollAttack() >= PC.acc) {
+                    currentE.hull -= PC.firepower;
+                    window.alert("Direct Hit!");
+                    turn +=1;
+                    } else {
+                        window.alert("Missed! Enemy ship is charging weapons!");
+                        turn +=1;
+                    }
+                    
+                } else if (turn >= 2) {
+                    if (rollAttack() >= currentE.acc){
+                        PC.hull -= currentE.firepower
+                        window.alert("We're Hit!");
+                        turn -=1;
+                    } else {
+                        window.alert("We Narrowly avoided that one!");
+                        turn -=1;
+                    }
+                    
+             }
+        
+        }
+    }
+}
+fight()

@@ -105,7 +105,7 @@ PC.name = prompt("What's your name Lt", "Bobby?")
 if (PC.name == null || PC.name == "") {
     window.alert("You circum to your injuries and die ... end.");
     } else {
-     window.alert("Congrates Captian " + PC.name + "! Thanks to the last hull breach you've been promoted.");
+     window.alert("Congrates Captian " + PC.name + "! Thanks to the last hull breach you've been promoted to acting Captain");
 };
 
 window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
@@ -149,7 +149,7 @@ fight()
 if (PC.hull <= 0) {
     window.alert("GAME OVER");
 } else if (currentE.hull <= 0) {
-    window.alert("*Silance*\nFirst Officer: 'Talk about a lucky shot, way to go Cap " + PC.name + ".")
+    window.alert("*Silence*\nFirst Officer: 'Talk about a lucky shot, way to go Cap " + PC.name + ".")
         currentE = enemy2;
         window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
         window.alert("Helmsman: ' Here we go again! Incoming Message!' ")
@@ -208,6 +208,15 @@ if (PC.hull <= 0) {
         window.alert("Helmsman: 'Incoming ship sir looks like It's the last one too.' ")
 }
 
-action = prompt("Captain " + currentE.captain + ": 'We have been studing your vessal human and have built this one to match yours.\nYour skies will rain fire, your oceans will boil, your streets will run red with the blood of billions. Only then, after humanities last pitiful hope is extinguished, will we end their live. Let's Go. \n\n" + enemyStats() + "\n\n" + pcStats() + "\nYour crew is silent knowing there's only one answer to this", "fight")
+action = prompt("Captain " + currentE.captain + ": 'We have been studing your vessal human and have built this one to match yours.\n\nYour skies will rain fire, your oceans will boil, your streets will run red with the blood of billions. Only then, after humanities last pitiful hope is extinguished, will we end their live. Let's Go. \n\n" + enemyStats() + "\n\n" + pcStats() + "\nYour crew is silent knowing there's only one answer to this", "fight")
 
 fight()
+
+if (PC.hull <= 0) {
+    window.alert("GAME OVER");
+} else if (currentE.hull <= 0) {
+    window.alert("First Officer:'... All Enemy ships destroyed Captain. We WON!' \nThe crew of the " + PC.ship + " celebrate a battle well fought. On the way back to earth a moment of silence is held for those lost and you are offically promoted to Captain'\n")
+    window.alert("Alert! \nAlert!\nAlert!");
+        window.alert("Helmsman: 'Sorry, wrong button. Now beginning landing protocol, Home Sweet Home.' ")
+}
+

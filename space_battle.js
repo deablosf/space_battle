@@ -13,6 +13,8 @@
 //     let i = Math.floor(Math.random()*captains,length)
 //     return i; }
 
+//BONUSES = Build shields and the ability to burnthrough shields to get two attacks!
+
 // The players character and ship stats
 const PC = {
     name: '',
@@ -34,7 +36,7 @@ class Enemy {
 }
 // Random attack roll
 let rollAttack = () => {
-    var min = 0.5,
+    var min = 0.4,
         max = 1.0,
         highlightedNumber = Math.random() * (max - min) + min;
         att = highlightedNumber.toFixed(1)

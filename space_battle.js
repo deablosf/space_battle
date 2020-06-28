@@ -60,11 +60,10 @@ let enemyBuild = (min, max) => {
 // Randomized enemy accuaracy
 let enemyAcc = () => {
     var min = 0.6,
-        max = 0.8,
+        max = 0.9,
         highlightedNumber = Math.random() * (max - min) + min;
-        acc = highlightedNumber.toFixed(1);
-        return acc
-    console.log(acc);
+        accE = highlightedNumber.toFixed(1);
+        return accE
 };
 
 // Enemies will figure out to put them in an array that feeds into the constructor.
@@ -85,7 +84,7 @@ let turn = 1;
 
 // Quick peek at current player's stats
 let pcStats = () => {
-    now = PC.ship + " -- Hull:[" + PC.hull + "] Firepower:[" + PC.firepower + "] Accuracy:[" + PC.acc + "]";
+    now = PC.ship + " -- Hull:[" + PC.hull + "] Firepower:[" + PC.firepower + "] Accuracy:[" + PC.acc + "] Shields:[" + PC.shield + "]";
     return now
 }
 // Quick peek at current enemy's stats
@@ -97,7 +96,7 @@ let enemyStats = () => {
 let torpedo = () => {
     if (PC.payload === 0){
         window.alert("We're out of torpedoes, it'll take some time to fabricate more!")
-    } else if (rollAttack() >= acc - 0.2){
+    } else if (rollAttack() >= PC.acc - 0.2){
         PC.payload -=1;
         currentE.hull -=4;
         PC.hull -=1;
@@ -113,8 +112,8 @@ let torpedo = () => {
 }
 
 let cannons = () => {
-    if (rollAttack() >= acc){
-        currentE.hull -=5;
+    if (rollAttack() >= PC.acc){
+        currentE.hull -= PC.firepower;
         window.alert("Direct Hit!\n" + enemyStats());
         PC.action = "none";
         turn +=1;
@@ -131,18 +130,21 @@ let enemyattack = () => {
         window.alert("Helsmen: 'Captain, There's a strange build up of energy coming from the enemy ship!' " + "")
         window.alert("Helsmen: 'Captain, There's a Strange build up- wait what?")
         turn +=1;
-    } else if (rollAttack >= currentE.acc){
-        if (PC.shield - currentE.firepower < 0) {
+        } else if (rollAttack() >= currentE.acc){
+            if (PC.shield - currentE.firepower > 0){
+                PC.shield -= currentE.firepower;
+                window.alert("We're Hit!\n" + pcStats());
+                turn -=1;
+            } else if (PC.shield - currentE.firepower < 0) {
             PC.hull -= (currentE.firepower - PC.shield);
-	        PC.shield -= PC.Shield;
+            PC.shield = 0;
             window.alert("We're Hit!\n" + pcStats());
             turn -=1;
-        } else {
-            PC.hull -= currentE.firepower
-            window.alert("We're Hit!\n" + pcStats());
-            turn -=1;
-        }
-        
+        } 
+        } else if (rollAttack() >= 0.9 && turn < 3) {
+        window.alert("Helsmen: 'Captain, There's a strange build up of energy coming from the enemy ship!' " + "")
+        window.alert("Helsmen: 'Captain, There's a Strange build up- wait what?")
+        turn +=1;     
     } else {
         window.alert("We Narrowly avoided that one!");
         turn -=1;
@@ -156,7 +158,7 @@ let fight = () => {
         } else {
             while (PC.hull > 0 && currentE.hull > 0) {
                 if (turn <= 1){
-                    PC.action = prompt("First officer: 'We still have Laser cannons and maybe some torpedoes' ", "cannons or torpedoes")
+                    PC.action = prompt(enemyStats() + "\nFirst officer: 'We still have Laser cannons and maybe some torpedoes' ", "cannons or torpedoes")
                     if (PC.action == "cannons") {
                         cannons();
                     } else if (PC.action == "torpedoes") {

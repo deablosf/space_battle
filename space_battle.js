@@ -14,15 +14,20 @@
 //     return i; }
 
 //BONUSES = Build shields and the ability to burnthrough shields to get two attacks!
+//Prompt ( fire the Laser cannons[acc: normal, Firepower: 5 ] on launch a buster torpedo [inventory: 4, acc: high, firepower: 4 but does splash damage of 1 to own ship].
 
+//Shields: will take damage first then hit the hull.
 // The players character and ship stats
 const PC = {
     name: '',
     ship: 'Uss Schwarzenegger',
     hull: 20,
     firepower: 5,
-    acc: 0.7
+    acc: 0.7,
+    payload: 0, //the acc will be the normal acc - 0.2 and do 4 damage
+    action: "none"
 }
+
 
 // Enemy constructor 
 class Enemy {
@@ -42,22 +47,15 @@ let rollAttack = () => {
         att = highlightedNumber.toFixed(1)
     return att;
 };
-// Randomized enemy health
-let enemyHull = () => {
-    var min = 3,
-        max = 7,
-        health = Math.floor(Math.random() * (max - min) + min);
-        return health;
+// Randomized enemy health and firepower
+let enemyBuild = (min, max) => {
+    var min = min,
+        max = max,
+        num = Math.floor(Math.random() * (max - min) + min);
+        return num;
     // console.log(score);
 };
-// Randomized enemy firepower
-let enemyPower = () => {
-    var min = 2,
-        max = 5,
-        power = Math.floor(Math.random() * (max - min) + min);
-        return power
-    // console.log(score);
-};
+
 // Randomized enemy accuaracy
 let enemyAcc = () => {
     var min = 0.6,
@@ -69,17 +67,17 @@ let enemyAcc = () => {
 };
 
 // Enemies will figure out to put them in an array that feeds into the constructor.
-let enemy1 = new Enemy("Xorn", enemyHull(), enemyPower(), enemyAcc())
+let enemy1 = new Enemy("Xorn", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
-let enemy2 = new Enemy("Warf", enemyHull(), enemyPower(), enemyAcc())
+let enemy2 = new Enemy("Warf", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
-let enemy3 = new Enemy("Orion", enemyHull(), enemyPower(), enemyAcc())
+let enemy3 = new Enemy("Orion", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
-let enemy4 = new Enemy("Gargamell", enemyHull(), enemyPower(), enemyAcc())
+let enemy4 = new Enemy("Gargamell", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
-let enemy5 = new Enemy("Dylon", enemyHull(), enemyPower(), enemyAcc())
+let enemy5 = new Enemy("Dylon", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
-let enemy6 = new Enemy("Phobos", enemyHull(), enemyPower(), enemyAcc())
+let enemy6 = new Enemy("Phobos", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
 let currentE = enemy1
 let turn = 1;
@@ -94,7 +92,54 @@ let enemyStats = () => {
     now = "Enemy Ship -- Hull:[" + currentE.hull + "] Firepower:[" + currentE.firepower + "] Accuracy:[" + currentE.acc + "]";
     return now
 }
-// FIGHT LOOP
+// FIGHT LOOP & ACTIONS! -------
+let torpedo = () => {
+    if (PC.payload === 0){
+        window.alert("We're out of torpedoes, it'll take some time to fabricate more!")
+    } else if (rollAttack() >= acc - 0.2){
+        PC.payload -=1;
+        currentE.hull -=4;
+        PC.hull -=1;
+        window.alert("Direct Hit!\n" + enemyStats() + "\n" + "Torpedos remaining:" + PC.payload);
+        PC.action = "none";
+        turn +=1;
+    } else {
+        PC.payload -=1;
+        window.alert("Missed! Enemy ship is charging weapons!" + "\n" + "Torpedos remaining: " + PC.payload);
+        PC.action = "none";
+        turn +=1;
+    }
+}
+
+let cannons = () => {
+    if (rollAttack() >= acc){
+        currentE.hull -=5;
+        window.alert("Direct Hit!\n" + enemyStats());
+        PC.action = "none";
+        turn +=1;
+    } else {
+        window.alert("Missed! Enemy ship is charging weapons!");
+        PC.action = "none";
+        turn +=1;
+    }
+
+}
+
+let enemyattack = () => {
+    if (rollAttack() >= 0.9 && turn < 3) {
+        window.alert("Helsmen: 'Strange build up of energy coming from the enemy ship!' " + "")
+        window.alert("Helsmen: 'Strange build up- wait what?")
+        turn +=1;
+    } else if (rollAttack >= currentE.acc){
+        PC.hull -= currentE.firepower
+        window.alert("We're Hit!\n" + pcStats());
+        turn -=1;
+    } else {
+        window.alert("We Narrowly avoided that one!");
+        turn -=1;
+    }
+}
+
 let fight = () => {
     if (action == null || action == "" || action == "flee") {
         window.alert("The USS Schwarzenegger scram throster come online and the warship B lines it back to earth!");
@@ -102,24 +147,16 @@ let fight = () => {
         } else {
             while (PC.hull > 0 && currentE.hull > 0) {
                 if (turn <= 1){
-                    if (rollAttack() >= PC.acc) {
-                        currentE.hull -= PC.firepower;
-                        window.alert("Direct Hit!\n" + enemyStats());
-                        turn +=1;
-                        } else {
-                            window.alert("Missed! Enemy ship is charging weapons!");
-                            turn +=1;
+                    PC.action = prompt("First officer: 'We still have Laser cannons and maybe some torpedoes' ", "cannons or torpedoes")
+                    if (PC.action == "cannons") {
+                        cannons();
+                    } else if (PC.action == "torpedoes") {
+                        torpedo();
                         }
                         
                     } else if (turn >= 2) {
-                        if (rollAttack() >= currentE.acc){
-                            PC.hull -= currentE.firepower
-                            window.alert("We're Hit!\n" + pcStats());
-                            turn -=1;
-                        } else {
-                            window.alert("We Narrowly avoided that one!");
-                            turn -=1;
-                        }
+                        enemyattack()
+                        
                         
                  }
             
@@ -127,12 +164,11 @@ let fight = () => {
         }
     }
 
-
 // - - - - - - - - - - - - - - - -  BEGINNING OF GAME - - - - - - - - - - - - - - - -
 
 while (PC.hull > 0) {
    
-window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You a fresh new lieutenant that has been stationed on the USS Schwarzenegger. It's been a quiet patro-");
+window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You are a fresh new lieutenant that has been stationed on the USS Schwarzenegger. It's been a quiet patro-");
 
 window.alert("BOOOOOOOoooooooOOOOOOOOooooOOOOOoooOOOOOOOOM!")
 
@@ -161,6 +197,9 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("*Silence*\nFirst Officer: 'Talk about a lucky shot, way to go Cap " + PC.name + ".")
         turn -=1;
+        if (PC.payload <= 3){
+            PC.payload +=1;
+        };
         currentE = enemy2;
         window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
         window.alert("Helmsman: ' Here we go again! Incoming Message!' ")
@@ -170,13 +209,15 @@ action = prompt("Captain " + currentE.captain + ": 'My Brood will find your carc
 
 fight()
 
-
 if (PC.hull <= 0) {
     window.alert("GAME OVER");
     break;
 } else if (currentE.hull <= 0) {
     window.alert("'Sweet Christmas, WE WON!' The crew cheers, hugs and thanks their stars that Captain " + PC.name + " didn't get them all killed")
     turn -=1;
+    if (PC.payload <= 3){
+        PC.payload +=1;
+    };
         currentE = enemy3
         window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
         window.alert("Helmsman: 'Oh Fu-' ")
@@ -192,6 +233,9 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("First Officer:'That's How We Do, THAT'S HOW WE DO!'\n*Slow chant*Captain " + PC.name + " Captain " + PC.name + "! Captai- ")
     turn -=1;
+    if (PC.payload <= 3){
+        PC.payload +=1;
+    };
         currentE = enemy4;
         window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
         window.alert("Helmsman: 'REALLY?!?' ")
@@ -207,6 +251,9 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("First Officer:'Shhh no one say anything!'\n*Silence*");
         turn -=1;
+        if (PC.payload <= 3){
+            PC.payload +=1;
+        };
         currentE = enemy5;
         window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
         window.alert("Helmsman: 'You know what, Come On, GET SOME!' ")
@@ -222,6 +269,9 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("First Officer:'Communication from Earth Cap, we're the last ship in the area.'\n")
         turn -=1;
+        if (PC.payload <= 3){
+            PC.payload +=1;
+        };
         currentE = enemy6;
         window.alert("Alert Enemy vessal approaching! \nAlert Enemy vessal approaching!\nAlert Enemy vessal approaching!");
         window.alert("Helmsman: 'Incoming ship sir looks like It's the last one too.' ")
@@ -235,7 +285,7 @@ if (PC.hull <= 0) {
     window.alert("GAME OVER");
     break;
 } else if (currentE.hull <= 0) {
-    window.alert("First Officer:'... All Enemy ships destroyed Captain. We WON!' \nThe crew of the " + PC.ship + " celebrate a battle well fought. On the way back to earth a moment of silence is held for those lost and you are offically promoted to Captain'\n")
+    window.alert("First Officer:'... All Enemy ships destroyed Captain. We WON!' \n\nThe crew of the " + PC.ship + " celebrate a battle well fought. On the way back to earth a moment of silence is held for those lost and you are offically promoted to Captain'\n")
     window.alert("Alert! \nAlert!\nAlert!");
         window.alert("Helmsman: 'Sorry, wrong button. Now beginning landing protocol, Home Sweet Home.' ")
         break;

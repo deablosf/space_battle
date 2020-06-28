@@ -127,8 +127,8 @@ let cannons = () => {
 
 let enemyattack = () => {
     if (rollAttack() >= 0.9 && turn < 3) {
-        window.alert("Helsmen: 'Strange build up of energy coming from the enemy ship!' " + "")
-        window.alert("Helsmen: 'Strange build up- wait what?")
+        window.alert("Helsmen: 'Captain, There's a strange build up of energy coming from the enemy ship!' " + "")
+        window.alert("Helsmen: 'Captain, There's a Strange build up- wait what?")
         turn +=1;
     } else if (rollAttack >= currentE.acc){
         PC.hull -= currentE.firepower

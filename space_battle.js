@@ -24,7 +24,8 @@ const PC = {
     hull: 20,
     firepower: 5,
     acc: 0.7,
-    payload: 0, //the acc will be the normal acc - 0.2 and do 4 damage
+    payload: 4, //the acc will be the normal acc - 0.2 and do 4 damage
+    shield: 10,
     action: "none"
 }
 
@@ -131,9 +132,17 @@ let enemyattack = () => {
         window.alert("Helsmen: 'Captain, There's a Strange build up- wait what?")
         turn +=1;
     } else if (rollAttack >= currentE.acc){
-        PC.hull -= currentE.firepower
-        window.alert("We're Hit!\n" + pcStats());
-        turn -=1;
+        if (PC.shield - currentE.firepower < 0) {
+            PC.hull -= (currentE.firepower - PC.shield);
+	        PC.shield -= PC.Shield;
+            window.alert("We're Hit!\n" + pcStats());
+            turn -=1;
+        } else {
+            PC.hull -= currentE.firepower
+            window.alert("We're Hit!\n" + pcStats());
+            turn -=1;
+        }
+        
     } else {
         window.alert("We Narrowly avoided that one!");
         turn -=1;
@@ -197,6 +206,11 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("*Silence*\nFirst Officer: 'Talk about a lucky shot, way to go Cap " + PC.name + ".")
         turn -=1;
+        if (PC.shield >= 6){
+            PC.shield = 10;
+        } else if (PC.shield < 6) {
+			PC.shield +=4;
+        };
         if (PC.payload <= 3){
             PC.payload +=1;
         };
@@ -215,6 +229,11 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("'Sweet Christmas, WE WON!' The crew cheers, hugs and thanks their stars that Captain " + PC.name + " didn't get them all killed")
     turn -=1;
+    if (PC.shield >= 6){
+        PC.shield = 10;
+    } else if (PC.shield < 6) {
+        PC.shield +=4;
+    };
     if (PC.payload <= 3){
         PC.payload +=1;
     };
@@ -233,6 +252,11 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("First Officer:'That's How We Do, THAT'S HOW WE DO!'\n*Slow chant*Captain " + PC.name + " Captain " + PC.name + "! Captai- ")
     turn -=1;
+    if (PC.shield >= 6){
+        PC.shield = 10;
+    } else if (PC.shield < 6) {
+        PC.shield +=4;
+    };
     if (PC.payload <= 3){
         PC.payload +=1;
     };
@@ -251,6 +275,11 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("First Officer:'Shhh no one say anything!'\n*Silence*");
         turn -=1;
+        if (PC.shield >= 6){
+            PC.shield = 10;
+        } else if (PC.shield < 6) {
+			PC.shield +=4;
+        };
         if (PC.payload <= 3){
             PC.payload +=1;
         };
@@ -269,6 +298,11 @@ if (PC.hull <= 0) {
 } else if (currentE.hull <= 0) {
     window.alert("First Officer:'Communication from Earth Cap, we're the last ship in the area.'\n")
         turn -=1;
+        if (PC.shield >= 6){
+            PC.shield = 10;
+        } else if (PC.shield < 6) {
+			PC.shield +=4;
+        };
         if (PC.payload <= 3){
             PC.payload +=1;
         };

@@ -77,14 +77,14 @@ let enemy4 = new Enemy("Gargamell", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc
 
 let enemy5 = new Enemy("Dylon", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
 
-let enemy6 = new Enemy("Phobos", enemyBuild(3, 7), enemyBuild(2, 5), enemyAcc())
+let enemy6 = new Enemy("Phobos", enemyBuild(3, 10), enemyBuild(2, 6), enemyAcc())
 
 let currentE = enemy1
 let turn = 1;
 
 // Quick peek at current player's stats
 let pcStats = () => {
-    now = PC.ship + " -- Hull:[" + PC.hull + "] Firepower:[" + PC.firepower + "] Accuracy:[" + PC.acc + "] Shields:[" + PC.shield + "]";
+    now = PC.ship + " -- Hull:[" + PC.hull + "] Firepower:[" + PC.firepower + "] Accuracy:[" + PC.acc + "] Shields:[" + PC.shield + "] Payload:[" + PC.payload + "]" ;
     return now
 }
 // Quick peek at current enemy's stats
@@ -158,7 +158,7 @@ let fight = () => {
         } else {
             while (PC.hull > 0 && currentE.hull > 0) {
                 if (turn <= 1){
-                    PC.action = prompt(enemyStats() + "\nFirst officer: 'We still have Laser cannons and maybe some torpedoes' ", "cannons or torpedoes")
+                    PC.action = prompt(enemyStats() + "\nFirst officer: 'We still have the main Laser 'cannons' and maybe some 'torpedoes' but at this distance we're difinitly in the splash zone' ", "cannons or torpedoes")
                     if (PC.action == "cannons") {
                         cannons();
                     } else if (PC.action == "torpedoes") {
@@ -297,7 +297,7 @@ if (PC.hull <= 0) {
     window.alert("GAME OVER");
     break;
 } else if (currentE.hull <= 0) {
-    window.alert("First Officer:'Communication from Earth Cap, we're the last ship in the area.'\n")
+    window.alert("First Officer:'Communication from Earth Cap, ... we- we're the last ship in this sector ...'\n")
         turn -=1;
         if (PC.shield >= 6){
             PC.shield = 10;
@@ -312,7 +312,7 @@ if (PC.hull <= 0) {
         window.alert("Helmsman: 'Incoming ship sir looks like It's the last one too.' ")
 }
 
-action = prompt("Captain " + currentE.captain + ": 'We have been studing your vessal human and have built this one to match yours.\n\nYour skies will rain fire, your oceans will boil, your streets will run red with the blood of billions. Only then, after humanities last pitiful hope is extinguished, will we end their live. Let's Go. \n\n" + enemyStats() + "\n\n" + pcStats() + "\nYour crew is silent knowing there's only one answer to this", "fight")
+action = prompt("Captain " + currentE.captain + ": 'We have been studing your vessal humans and have built this one to match yours.\n\nOnce you are swept out of our way we will raze your world. Your skies will rain fire, your oceans will boil, your streets will run red with the blood of billions. Only then, after humanities last pitiful hope is extinguished, will we end their lives. Let's Go. \n\n" + enemyStats() + "\n\n" + pcStats() + "\nYour crew is silent knowing there's only one answer to this", "fight")
 
 fight()
 

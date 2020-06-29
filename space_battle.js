@@ -92,7 +92,7 @@ let enemyStats = () => {
     now = "Enemy Ship -- Hull:[" + currentE.hull + "] Firepower:[" + currentE.firepower + "] Accuracy:[" + currentE.acc + "]";
     return now
 }
-// FIGHT LOOP & ACTIONS! -------
+// player attack option
 let torpedo = () => {
     if (PC.payload === 0){
         window.alert("We're out of torpedoes, it'll take some time to fabricate more!")
@@ -110,7 +110,7 @@ let torpedo = () => {
         turn +=1;
     }
 }
-
+// player attack option
 let cannons = () => {
     if (rollAttack() >= PC.acc){
         currentE.hull -= PC.firepower;
@@ -124,7 +124,7 @@ let cannons = () => {
     }
 
 }
-
+// the enemy attack 
 let enemyattack = () => {
     if (rollAttack() >= 0.9 && turn < 3) {
         window.alert("Helsmen: 'Captain, There's a strange build up of energy coming from the enemy ship!' " + "")
@@ -150,7 +150,7 @@ let enemyattack = () => {
         turn -=1;
     }
 }
-
+//the fight loop
 let fight = () => {
     if (action == null || action == "" || action == "flee") {
         window.alert("The USS Schwarzenegger scram throster come online and the warship B lines it back to earth!");
@@ -176,7 +176,6 @@ let fight = () => {
     }
 
 // - - - - - - - - - - - - - - - -  BEGINNING OF GAME - - - - - - - - - - - - - - - -
-
 while (PC.hull > 0) {
    
 window.alert("Welcome to space battle. \nEarth has been attacked by a horde of aliens! You are a fresh new lieutenant that has been stationed on the USS Schwarzenegger. It's been a quiet patro-");
@@ -330,3 +329,4 @@ if (PC.hull <= 0) {
 }
 
 window.alert("Game Over")
+Window.confirm("Do you want to play again?")
